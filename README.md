@@ -195,7 +195,7 @@ Sebelum deployment production, konfigurasi environment, database, domain, dan po
 
 LINK DEMO YOUTUBE:
 Nayla Zazki Kirani(H1H024007)= https://youtu.be/AgQDeviibrs
-Thufail Labib Asshidqi (H1H024037)= 
+Thufail Labib Asshidqi (H1H024037)= youtu.be/BYHpcPRMwbE
 Ramadhanu Isnaera Ahnaf Wibawa (H1H024061)= https://youtu.be/H1kqnKKY4gg
 FIKRI RIZQIN FAUIZN (H1H024068)=
 
