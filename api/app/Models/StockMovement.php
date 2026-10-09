@@ -19,7 +19,7 @@ class StockMovement extends Model
     ];
 
     protected $casts = [
-        'quantity' => 'integer',
+        'quantity' => 'float',
     ];
 
     public function product(): BelongsTo

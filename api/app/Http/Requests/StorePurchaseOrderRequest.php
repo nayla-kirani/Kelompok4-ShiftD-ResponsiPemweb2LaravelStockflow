@@ -17,7 +17,7 @@ class StorePurchaseOrderRequest extends FormRequest
             'supplier_id' => 'required|exists:suppliers,id',
             'items' => 'required|array|min:1',
             'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.quantity' => 'required|numeric|gt:0|decimal:0,3',
             'items.*.unit_price' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
             'expected_date' => 'nullable|date',

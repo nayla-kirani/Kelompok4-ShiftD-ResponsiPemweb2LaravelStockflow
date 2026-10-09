@@ -15,7 +15,7 @@ class AdjustStockRequest extends FormRequest
     {
         return [
             'type' => 'required|in:in,out,adjustment',
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|numeric|gt:0|decimal:0,3',
             'reason' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
         ];

@@ -150,11 +150,27 @@ class PurchaseOrderController extends Controller
 
         $newStatus = $validated['status'];
 
-        if ($newStatus === 'received') {
-            DB::transaction(function () use ($purchaseOrder, $request) {
-                $purchaseOrder->load('items.product');
+        $result = DB::transaction(function () use ($purchaseOrder, $request, $newStatus) {
+            $order = PurchaseOrder::whereKey($purchaseOrder->id)
+                ->lockForUpdate()
+                ->firstOrFail();
 
-                foreach ($purchaseOrder->items as $item) {
+            if ($order->status === 'received') {
+                return $newStatus === 'received'
+                    ? ['order' => $order, 'error' => null]
+                    : ['order' => null, 'error' => 'A received purchase order cannot change status.'];
+            }
+
+            if ($newStatus === 'received') {
+                if ($order->status !== 'approved') {
+                    return [
+                        'order' => null,
+                        'error' => 'Only approved purchase orders can be received.',
+                    ];
+                }
+
+                $order->load('items.product');
+                foreach ($order->items as $item) {
                     StockMovement::create([
                         'product_id' => $item->product_id,
                         'user_id' => $request->user()->id,
@@ -169,17 +185,23 @@ class PurchaseOrderController extends Controller
                     $item->update(['received_quantity' => $item->quantity]);
                 }
 
-                $purchaseOrder->update([
+                $order->update([
                     'status' => 'received',
                     'received_date' => now(),
                 ]);
-            });
-        } else {
-            $purchaseOrder->update(['status' => $newStatus]);
+            } else {
+                $order->update(['status' => $newStatus]);
+            }
+
+            return ['order' => $order, 'error' => null];
+        });
+
+        if ($result['error'] !== null) {
+            return response()->json(['message' => $result['error']], 422);
         }
 
         return response()->json([
-            'data' => $purchaseOrder->fresh()->load(['items.product', 'supplier', 'user']),
+            'data' => $result['order']->fresh()->load(['items.product', 'supplier', 'user']),
         ]);
     }
 }
