@@ -32,9 +32,9 @@ class Product extends Model
     protected $casts = [
         'unit_price' => 'decimal:2',
         'cost_price' => 'decimal:2',
-        'quantity' => 'integer',
-        'min_stock_level' => 'integer',
-        'max_stock_level' => 'integer',
+        'quantity' => 'float',
+        'min_stock_level' => 'float',
+        'max_stock_level' => 'float',
         'is_active' => 'boolean',
     ];
 
