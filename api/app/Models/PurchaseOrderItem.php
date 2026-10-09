@@ -19,8 +19,8 @@ class PurchaseOrderItem extends Model
     protected $casts = [
         'unit_price' => 'decimal:2',
         'total' => 'decimal:2',
-        'quantity' => 'integer',
-        'received_quantity' => 'integer',
+        'quantity' => 'float',
+        'received_quantity' => 'float',
     ];
 
     public function purchaseOrder(): BelongsTo
