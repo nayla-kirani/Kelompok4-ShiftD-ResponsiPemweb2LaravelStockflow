@@ -172,4 +172,3 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('purchase-orders', 'purchaseOrders');
         });
 });
-```
