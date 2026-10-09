@@ -67,19 +67,49 @@ Aplikasi ini menyediakan dashboard untuk memantau kondisi inventori serta berbag
 
 ## Struktur Project
 
+```text
 stockflow/
 ├── api/                    # Backend Laravel
 ├── frontend/               # Frontend Vue.js
 ├── docker/                 # Konfigurasi Docker dan Nginx
 ├── screenshots/            # Dokumentasi tampilan aplikasi
 ├── docker-compose.yml      # Konfigurasi Docker Compose
-├── .dockerignore
-├── .gitignore
-├── LICENSE
-└── README.md
+├── .dockerignore           # File yang diabaikan saat build Docker
+├── .gitignore              # File yang diabaikan Git
+├── LICENSE                 # Lisensi project
+└── README.md               # Dokumentasi project
+```
 
----
+### Struktur Backend
 
+```text
+api/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Requests/
+│   │   └── Middleware/
+│   └── Models/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── routes/
+│   └── api.php
+└── composer.json
+```
+
+### Struktur Frontend
+
+```text
+frontend/
+└── src/
+    ├── api/                # Komunikasi dengan backend API
+    ├── components/         # Komponen UI yang dapat digunakan ulang
+    ├── pages/              # Halaman aplikasi
+    ├── stores/             # State management
+    ├── router/             # Konfigurasi navigasi
+    └── types/              # Definisi tipe TypeScript
+```
 ## Menjalankan Project
 
 Pastikan Docker Desktop sudah berjalan.
